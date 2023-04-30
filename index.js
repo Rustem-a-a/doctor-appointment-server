@@ -17,6 +17,7 @@ app.use('/doctor', doctorRouter)
 app.use('/slot', slotRouter)
 
 const PORT = process.env.PORT || config.get('serverPort')
+
 const start = async () => {
     try {
         await mongoose.connect(config.get('database'), {
@@ -31,6 +32,5 @@ const start = async () => {
     }
 }
 start()
-
 const job = schedule.scheduleJob('*/1 * * * * *', taskToSchedule);
 fs.writeFileSync('notification.log','')

@@ -25,4 +25,5 @@ const taskToSchedule = async () => {
         }
     })
 }
+
 export default taskToSchedule

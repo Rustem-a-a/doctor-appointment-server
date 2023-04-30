@@ -93,36 +93,20 @@ router.post('/refreshDoctorSlot',
     async (req, res) => {
         try {
             const {doctor_id} = req.body
-            // const free = true
-            // await Doctor.findByIdAndUpdate(
-            //     doctor_id,
-            //     {
-            //         $set: {
-            //             "slots.$[inner].free": free,
-            //         }
-            //     },
-            //     {
-            //         arrayFilters: [{"inner.free": false}],
-            //         new: true
-            //     })
             const date = new Date();
             const year = date.getFullYear();
             const month = date.getMonth();
             const day = date.getDate();
             const businessHoursStart = new Date(year, month, day, 8, 0, 0, 0);
             const businessHoursEnd = new Date(year, month, day, 17, 0, 0, 0);
-            const interval = 30; // in minutes
-
+            const interval = 30;
             const doctor = await Doctor.findById(doctor_id);
-
             if (!doctor) {
                 throw new Error('Doctor not found');
             }
-
             doctor.slots = [];
             const slots = [];
             let currentSlotStart = new Date(businessHoursStart);
-
             while (currentSlotStart < businessHoursEnd) {
                 const currentSlotEnd = new Date(currentSlotStart.getTime() + interval * 60 * 1000);
                 const slot = {
@@ -135,13 +119,9 @@ router.post('/refreshDoctorSlot',
                 slots.push(slot);
                 currentSlotStart = currentSlotEnd;
             }
-
             doctor.slots = slots;
             await doctor.save();
-
             console.log(doctor);
-
-            // const doctor = await Doctor.findById(doctor_id)
             return res.status(200).json(doctor)
         } catch (e) {
             return res.status(405).json({message: 'DOCTOR IS NOT CREATED!!!'})
