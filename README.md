@@ -1,4 +1,4 @@
-# [DEMO](https://rustem-a-a.github.io/doctor's-appointment/)
+# [DEMO](https://rustem-a-a.github.io/doctor-appointment-client/)
 
 # Ресурс для записи на прием к врачу
 

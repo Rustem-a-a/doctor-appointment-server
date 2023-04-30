@@ -7,6 +7,7 @@ import doctorRouter from './routes/doctorRouter.js'
 import slotRouter from './routes/slotRouter.js'
 import schedule from 'node-schedule'
 import taskToSchedule from "./task.js";
+import fs from "fs";
 
 const app = express()
 app.use(express.json())
@@ -31,6 +32,5 @@ const start = async () => {
 }
 start()
 
-const job = schedule.scheduleJob('*/1 * * * *', function () {
-    taskToSchedule()
-});
+const job = schedule.scheduleJob('*/1 * * * * *', taskToSchedule);
+fs.writeFileSync('notification.log','')
