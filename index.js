@@ -5,31 +5,32 @@ import cors from 'cors'
 import userRouter from './routes/userRouter.js'
 import doctorRouter from './routes/doctorRouter.js'
 import slotRouter from './routes/slotRouter.js'
-
+import schedule from 'node-schedule'
+import taskToSchedule from "./task.js";
 
 const app = express()
 app.use(express.json())
 app.use(cors())
-app.use('/user',userRouter)
-app.use('/doctor',doctorRouter)
-app.use('/slot',slotRouter)
+app.use('/user', userRouter)
+app.use('/doctor', doctorRouter)
+app.use('/slot', slotRouter)
 
-const PORT =process.env.PORT || config.get('serverPort')
-
-
-const start = async()=>{
-
-    try{
-        await mongoose.connect(config.get('database'),{
-            useNewUrlParser:true,
-            useUnifiedTopology:true
+const PORT = process.env.PORT || config.get('serverPort')
+const start = async () => {
+    try {
+        await mongoose.connect(config.get('database'), {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
         })
-        app.listen(PORT,()=> {
+        app.listen(PORT, () => {
             console.log('Server is running in port ' + config.get('serverPort'))
         })
-    }
-    catch (e){
+    } catch (e) {
         console.log(e)
     }
 }
 start()
+
+const job = schedule.scheduleJob('*/1 * * * *', function () {
+    taskToSchedule()
+});
