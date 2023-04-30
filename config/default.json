@@ -1,0 +1,4 @@
+{
+  "serverPort": 5000,
+  "database" : "mongodb+srv://rustemabdulaev:aSAKfOcd0NHF69a0@cluster0.hrvgk9e.mongodb.net/slotfolder"
+}
