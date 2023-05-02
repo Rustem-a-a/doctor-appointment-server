@@ -6,7 +6,6 @@ const router = new Router()
 router.post('/doctorAdd',
     async (req, res) => {
         try {
-            console.log(234444444444)
             const {name, spec, slots} = req.body
             const doctorToAdd = new Doctor({
                 name,
@@ -121,7 +120,6 @@ router.post('/refreshDoctorSlot',
             }
             doctor.slots = slots;
             await doctor.save();
-            console.log(doctor);
             return res.status(200).json(doctor)
         } catch (e) {
             return res.status(405).json({message: 'DOCTOR IS NOT CREATED!!!'})

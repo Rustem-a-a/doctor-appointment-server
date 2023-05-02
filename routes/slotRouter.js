@@ -39,7 +39,6 @@ router.get('/getSlots',
 router.post('/deleteSlots',
     async (req, res) => {
         const {doctor_id} = req.body
-        console.log(doctor_id)
         try {
             const slots = await Slot.deleteMany({doctor_id: doctor_id})
             return res.status(200).json(slots)

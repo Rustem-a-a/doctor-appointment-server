@@ -23,11 +23,8 @@ router.get('/getUser/:user_id',
     async (req, res) => {
         try {
             const user_id = req.params.user_id
-            console.log(user_id)
             const user = await User.findOne({_id: user_id})
-            console.log(user)
             return res.status(200).json(user)
-
         } catch (e) {
             return res.status(405).json({message: 'USER IS NOT FOUND!!!'})
         }

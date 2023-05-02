@@ -32,5 +32,5 @@ const start = async () => {
     }
 }
 start()
-const job = schedule.scheduleJob('*/1 * * * * *', taskToSchedule);
+const job = schedule.scheduleJob('*/1 * * * *', taskToSchedule);
 fs.writeFileSync('notification.log','')
