@@ -16,8 +16,7 @@ app.use('/user', userRouter)
 app.use('/doctor', doctorRouter)
 app.use('/slot', slotRouter)
 
-const PORT = process.env.PORT || config.get('serverPort')
-
+const PORT = config.get('serverPort')||1002
 const start = async () => {
     try {
         await mongoose.connect(config.get('database'), {
